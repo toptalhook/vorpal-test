@@ -48,6 +48,9 @@ export default {
       ],
       scrolling: false,
       isScrolledToBottom: false,
+      momentum: 0,
+      lastY: 0,
+      lastTime: 0,
     };
   },
   mounted() {
@@ -56,13 +59,37 @@ export default {
 
     menuItems.addEventListener('touchstart', (e) => {
       startY = e.touches[0].pageY;
+      this.lastY = startY;
+      this.lastTime = Date.now();
+      this.momentum = 0;
+      // Cancel any ongoing animation
+      if (this.animationFrame) {
+        cancelAnimationFrame(this.animationFrame);
+      }
     });
 
     menuItems.addEventListener('touchmove', (e) => {
-      const moveY = e.touches[0].pageY - startY;
-      menuItems.scrollTop -= moveY;
-      startY = e.touches[0].pageY;
-      e.preventDefault(); 
+      const currentY = e.touches[0].pageY;
+      const deltaY = currentY - startY;
+      const currentTime = Date.now();
+      
+      // Calculate momentum
+      const timeElapsed = currentTime - this.lastTime;
+      if (timeElapsed > 0) {
+        this.momentum = (currentY - this.lastY) / timeElapsed * 15; // Adjust multiplier for desired effect
+      }
+      
+      menuItems.scrollTop -= deltaY;
+      startY = currentY;
+      this.lastY = currentY;
+      this.lastTime = currentTime;
+      e.preventDefault();
+    });
+
+    menuItems.addEventListener('touchend', () => {
+      if (Math.abs(this.momentum) > 0.1) {
+        this.animateScroll();
+      }
     });
   },
   methods: {
@@ -79,8 +106,27 @@ export default {
       // ) < 5;
       // this.isScrolledToBottom = bottomReached;
     },
+    animateScroll() {
+      const menuItems = this.$refs.menuItems;
+      const friction = 0.95; // Adjust for desired deceleration
+
+      const animate = () => {
+        menuItems.scrollTop -= this.momentum;
+        this.momentum *= friction;
+
+        if (Math.abs(this.momentum) > 0.1) {
+          this.animationFrame = requestAnimationFrame(animate);
+        }
+      };
+
+      this.animationFrame = requestAnimationFrame(animate);
+    },
   },
- 
+  beforeDestroy() {
+    if (this.animationFrame) {
+      cancelAnimationFrame(this.animationFrame);
+    }
+  }
 };
 </script>
 
