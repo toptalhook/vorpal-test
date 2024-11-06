@@ -1,0 +1,177 @@
+<template>
+  <div class="BattleControlPanel">
+    <template v-if="showEnemy">
+      <div class="BattleControlPanel__enemy">
+        <EnemyModelControl  
+        :level="level.current" 
+        />
+      </div>
+    </template>
+
+    <div class="BattleControlPanel__player">
+      <div class="BattleControlPanel__addItem">
+        <div class="BattleControlPanel__shopItems">
+          <ShopItemControl 
+          :items="items"
+          :inventoryList="inventoryList"
+          />
+        </div>
+        <div class="BattleControlPanel__score orbitron-font --semibold">
+            <p>GOLD:</p>
+            <p>{{ gold }}</p>
+        </div>
+      </div>
+      
+      <div class="BattleControlPanel__row">
+        <SatelliteFireSkill
+          :params="skills['satelliteFire']"
+          :cooldown="cooldown['satelliteFire']"
+          :disabled="isPendingSkill('satelliteFire')"
+          @fire="call('satelliteFire')"
+          @levelUp="levelUp('satelliteFire')"
+        />
+        <RocketFireSkill
+          :params="skills['rocketFire']"
+          :cooldown="cooldown['rocketFire']"
+          :disabled="isPendingSkill('rocketFire')"
+          @fire="call('rocketFire')"
+          @levelUp="levelUp('rocketFire')"
+        />
+      <ModelControl 
+        :level="level.current"
+        :progress="level.progress"
+        @click="showShopMenu"
+        />
+        <SlowdownSkill
+          :params="skills['slowdown']"
+          :cooldown="cooldown['slowdown']"
+          :disabled="isPendingSkill('slowdown')"
+          @apply="call('slowdown')"
+          @levelUp="levelUp('slowdown')"
+        />
+        <InvisibilitySkill
+          :params="skills['invisibility']"
+          :cooldown="cooldown['invisibility']"
+          :disabled="isPendingSkill('invisibility')"
+          @apply="call('invisibility')"
+          @levelUp="levelUp('invisibility')"
+        />
+      </div>
+    </div>
+  </div>
+ 
+</template>
+
+<script lang="ts">
+import {
+  BattleActionType,
+  BattleCooldown,
+  BattleData,
+  BattleActionPayload,
+} from '@/types';
+import { PropType } from 'vue';
+
+import {
+  EmptyControl
+} from './controls';
+
+import { BaseControl } from './controls/BaseControl';
+import { ModelControl } from './controls/ModelControl';
+import { ShopItemControl } from './controls';
+import { EnemyModelControl } from '../EnemyModelControl';
+import {
+  GoldControl,
+  LevelControl,
+  ShopControl
+} from './controls';
+
+import {
+  InvisibilitySkill,
+  RocketFireSkill,
+  SatelliteFireSkill,
+  SlowdownSkill
+} from './skills';
+import { ShopItemData } from '~/game/battle/Types';
+
+export default {
+  name: 'BattleControlPanel',
+  components: {
+    EmptyControl,
+    GoldControl,
+    InvisibilitySkill,
+    LevelControl,
+    RocketFireSkill,
+    SatelliteFireSkill,
+    ShopControl,
+    SlowdownSkill,
+    BaseControl,
+    ShopItemControl,
+    ModelControl,
+    EnemyModelControl,
+  },
+  props: {
+    skills: {
+      type: Object as PropType<BattleData['skills']>,
+      required: true
+    },
+    skillsPendingList: {
+      type: Array as PropType<BattleActionType[]>,
+      required: true
+    },
+    cooldown: {
+      type: Object as PropType<BattleCooldown>,
+      required: true
+    },
+    level: {
+      type: Object as PropType<BattleData['level']>,
+      required: true
+    },
+    gold: {
+      type: Number,
+      required: true
+    },
+    items: {
+      type: Array as PropType<ShopItemData[]>,
+    },
+    showEnemy: {
+      type: Boolean,
+      default: false
+    },
+    inventoryList: {
+      type: Array as PropType<number[]>,
+      default: () => []
+    }
+  },
+
+  emits: {
+    action: (payload: BattleActionPayload) => payload,  
+},
+ 
+  methods: {
+    call(actionType: BattleActionType) {
+      this.$emit('action', {
+        action: actionType,
+        type: 'call',
+      })
+    },
+    levelUp(actionType: BattleActionType) {
+      this.$emit('action', {
+        action: actionType,
+        type: 'levelUp',
+      })
+    },
+    isPendingSkill(type: BattleActionType) {
+      return this.skillsPendingList.includes(type);
+    },
+    setVisible() {
+      this.$emit('setVisible')
+    },
+    showShopMenu() {
+      this.$emit('showShopMenu')
+    }
+  },
+
+};
+</script>
+
+<style scoped src="./BattleControlPanel.css" />

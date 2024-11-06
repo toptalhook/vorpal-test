@@ -1,0 +1,58 @@
+.PlayerModel {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 190px;
+    width: 100%;
+    max-height: 236px;
+    height: 100%;
+    z-index: 3;
+    
+}
+
+.PlayerModel__pic {
+    position: absolute;
+    aspect-ratio: 1/1;
+    height: 79%;
+    max-width: 170px;
+    top: 6%;
+    z-index: -1;
+   
+}
+
+.PlayerModel__info {
+    pointer-events: all;
+    position: absolute;
+    z-index: 4;
+    height: 26.8%;
+    top: 66%;
+}
+
+.PlayerModel__shadow {
+    position: absolute;
+    pointer-events: all;
+    z-index: -2;
+    width: 60%;
+    height: 80%;
+    border-radius: 50%;
+    box-shadow: 0px 0px 9.87px rgba(12, 123, 238, 0.7),
+        0px 0px 19.73px rgba(12, 123, 238, 0.7), 
+        0px 0px 69.06px rgba(12, 123, 238, 0.7), 
+        0px 0px 138.11px rgba(12, 123, 238, 0.7)
+    
+}
+
+.PlayerModel__shadow:hover {
+    cursor: pointer;
+}
+
+.PlayerModel__info:hover {
+    cursor: pointer;
+}
+
+@media (max-width: 375px) {
+    .PlayerModel__info {
+        top: 67%;
+    }
+}

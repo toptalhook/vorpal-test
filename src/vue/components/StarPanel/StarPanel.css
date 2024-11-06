@@ -1,0 +1,111 @@
+.StarPanel {
+  --accent-color: #00ffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 854px;
+  height: 640px;
+  max-width: calc(100vw - 220px);
+  margin: auto;
+  position: relative;
+  top: -3.6vw;
+}
+
+.StarPanel__svg {
+  width: 100%;
+  max-height: calc(100% - 80px);
+  color: var(--accent-color);
+}
+
+.StarPanel__close {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  background-image: url(../gui/images/close.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.StarPanel__title,
+.StarPanel__text {
+  font-size: 17px;
+  fill: currentColor;
+  font-family: Inter, sans-serif;
+  font-weight: 300;
+  pointer-events: all;
+}
+
+.StarPanel__title {
+  font-size: 24px;
+}
+
+.StarPanel__text.is-clickable {
+  cursor: pointer;
+}
+
+.StarPanel__text.is-clickable:hover {
+  filter: drop-shadow(0 0 10px var(--accent-color));
+}
+
+.StarPanel__line {
+  fill: none;
+  stroke: currentColor;
+  stroke-miterlimit: 10;
+}
+
+.StarPanel__line.is-second {
+  opacity: 0.3;
+}
+
+.StarPanel__line.is-third {
+  opacity: 0.1;
+}
+
+.StarPanel__line.is-thin {
+  stroke-width: 0.25;
+}
+
+.StarPanel__line.is-progress {
+  stroke-width: 5;
+  filter: drop-shadow(0 0 3px rgb(0 255 255 / 75%));
+}
+
+.StarPanel__line.is-aim {
+  stroke-width: 0.5;
+}
+
+.StarPanel__line.is-button {
+  fill: url(#leftButtonGradient);
+}
+
+.StarPanel__line.is-button.is-right {
+  fill: url(#rightButtonGradient);
+}
+
+.StarPanel__button {
+  cursor: pointer;
+  pointer-events: all;
+}
+
+.StarPanel__button .StarPanel__line.is-button {
+  filter: brightness(0.8);
+  transition: ease 200ms filter;
+  will-change: filter;
+}
+
+.StarPanel__button:hover .StarPanel__line.is-button {
+  filter: brightness(1);
+}
+
+@media (max-width: 980px) {
+  .StarPanel {
+    width: calc(100vw - 20px);
+    max-width: none;
+    height: 100%;
+    margin: 0;
+    margin-left: 10px;
+  }
+}

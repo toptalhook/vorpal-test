@@ -1,0 +1,62 @@
+.WalletConnectPopup {
+}
+
+.WalletConnectPopup__wallets {
+  display: flex;
+  justify-content: space-around;
+}
+
+.WalletConnectPopup__wallet {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  padding: 0;
+  padding-top: 12px;
+  color: #eee;
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  font-family: inherit;
+  text-align: center;
+  text-transform: none;
+  cursor: pointer;
+  transition: ease transform 200ms;
+}
+
+.WalletConnectPopup__wallet:hover {
+  transform: scale(1.05);
+}
+
+.WalletConnectPopup__wallet::before {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 48px;
+  background-size: contain;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+.WalletConnectPopup__wallet.is-metamask::before {
+  background-image: url(../gui/images/wallets/metamask-logo.png);
+}
+
+.WalletConnectPopup__wallet.is-walletconnect::before {
+  background-image: url(../gui/images/wallets/wallet-connect-logo.png);
+}
+
+.WalletConnectPopup__wallet.is-telegram::before {
+  background-image: url(../gui/images/wallets/telegram-logo.png);
+}
+
+.WalletConnectPopup__wallet.is-ton::before {
+  background-image: url(../gui/images/wallets/ton-logo.png);
+}
+
+.WalletConnectPopup__wallet[disabled] {
+  opacity: 0.5;
+  user-select: none;
+  pointer-events: none;
+  filter: brightness(0.5) saturate(0.5);
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="pragma" content="no-cache" />
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+  <!-- Allow fullscreen app install in Android and IOS respectively -->
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Vorpal - Starmap</title>
+  
+  <link rel="icon" href="/assets/icon/favicon.ico" sizes="any">
+  <link rel="icon" href="/assets/icon/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#4a4a4a">
+  <!-- meta property="og:title" content="Vorpal Starmap" />
+  <meta property="og:description" content="Play Star defender game and watch stars on our galaxy" />
+  <meta property="og:image" content="https://starmap.vorpal.finance/gui/images/box.png" />
+  <meta property="og:url" content="https://starmap.vorpal.finance/" / -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  
+  <link rel="prefetch" href="/gui/images/views/view-galaxy.svg">
+  <link rel="prefetch" href="/gui/images/views/view-star.svg">
+  <link rel="prefetch" href="/gui/images/views/view-planet.svg">
+  <link rel="prefetch" href="/gui/images/views/views-panel-toggle.svg">
+  <link rel="prefetch" href="/gui/images/views/views-panel-outline.svg">
+  <link rel="prefetch" href="/gui/images/modes/mode-phantom.svg">
+  <link rel="prefetch" href="/gui/images/modes/mode-real.svg">
+  <link rel="prefetch" href="/gui/images/modes/mode-season.svg">
+  <link rel="prefetch" href="/gui/images/modes/mode-panel-outline.svg">
+  <link rel="prefetch" href="/gui/images/modes/mode-active-marker.svg">
+  <link rel="prefetch" href="/gui/images/modes/modes-toggle-button.svg">
+  <link rel="prefetch" href="/gui/images/levels/level-1.svg">
+  <link rel="prefetch" href="/gui/images/levels/level-2.svg">
+  <link rel="prefetch" href="/gui/images/levels/level-3.svg">
+  <link rel="prefetch" href="/gui/images/levels/level-4.svg">
+  <link rel="prefetch" href="/gui/images/levels/level-5.svg">
+  <link rel="prefetch" href="/gui/images/settings.svg">
+  <link rel="prefetch" href="/gui/images/wallet.svg">
+  <link rel="prefetch" href="/gui/images/wallet.svg">
+  <link rel="prefetch" href="/gui/images/preloader/logo.svg">
+  <link rel="prefetch" href="/gui/images/preloader/start-button.svg">
+  <link rel="prefetch" href="/gui/images/preloader/start-button-animation/Vector.svg">
+  <link rel="prefetch" href="/gui/images/star-defender/connect-line.svg">
+  <link rel="prefetch" href="/gui/images/star-defender/bg.svg">
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="./js/stats.min.js"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-86DGWJ0YG6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-86DGWJ0YG6'); 
+  </script>
+  <script>
+    // alert("Test version 33");
+    // alert(window.location.search);
+  </script>
+  <script>
+     // alert(JSON.stringify(window.Telegram.WebApp.initData))
+  </script>
+
+  <!-- <script src="https://markknol.github.io/console-log-viewer/console-log-viewer.js"></script> -->
+  <style>
+    .tgAppBody {
+      height: 100vh !important;
+      overflow: hidden !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="tgAuthContainer">
+
+  </div>
+  <div id="game"></div>
+  <div id="gui"></div>
+</body>
+<script
+async
+src="https://telegram.org/js/telegram-widget.js?22"
+data-telegram-login="Wgl_starmaptest_bot"
+data-size="medium"
+data-onauth="onTelegramAuth(user)"
+data-request-access="write"
+></script>
+<script>
+document.addEventListener("load", function() {
+    let queryString = window.location.href;
+    if (queryString.includes("#debug")) {
+      let iframes = document.querySelectorAll('iframe[id*="telegram"]');
+        iframes.forEach(function(iframe) {
+            iframe.style.position = "fixed";
+        });
+    }
+});
+</script>
+<script>
+  function onTelegramAuth(user) {
+    window.dispatchEvent(new CustomEvent('authEvent', { detail: user }))
+  }
+  </script>
+</html>

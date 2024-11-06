@@ -1,0 +1,22 @@
+.Logo {
+  width: 172px;
+  height: 50px;
+  background-image: url(../gui/images/preloader/header-logo-text.svg);
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+@media (max-width: 425px) {
+  .Logo {
+    width: 150px;
+    height: 46px; 
+  }
+}
+
+@media (max-width: 375px) {
+  .Logo {
+    width: 140px;
+    height: 46px; 
+  }
+}

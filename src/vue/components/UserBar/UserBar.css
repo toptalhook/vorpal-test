@@ -1,0 +1,277 @@
+/* General styles */
+.UserBar {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.UserBar__buttons {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+/* Search styles */
+.UserBar__search {
+  position: relative;
+}
+
+.UserBar__search-field {
+  width: 320px;
+  position: absolute;
+  right: -8px;
+  top: -8px;
+  z-index: 1;
+  pointer-events: all;
+}
+
+/* Button styles */
+.UserBar__button {
+  display: block;
+  width: 24px;
+  height: 41px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: all;
+  will-change: filter;
+  font-family: inherit;
+  transition: filter 200ms ease;
+}
+
+.UserBar__button.active,
+.UserBar__button:hover {
+  filter: drop-shadow(0px 0px 8px #00f0ff);
+}
+
+/* Specific button styles */
+.UserBar__button.is-mint,
+.UserBar__account {
+  width: auto;
+  height: auto;
+  padding: 4px 8px;
+  color: #00ffff;
+  border: 2px solid currentColor;
+  border-radius: 12px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.UserBar__button.is-mint {
+  font-size: 17px;
+}
+
+.UserBar__account {
+  border: none;
+  font-size: 12px;
+}
+
+.UserBar__button.is-mint::before {
+  display: none;
+}
+
+.UserBar__button.is-search { background-image: url(../gui/images/search.svg); }
+.UserBar__button.is-box { background-image: url(../gui/images/box-filled.svg); }
+.UserBar__button.is-settings { background-image: url(../gui/images/settings.svg); }
+.UserBar__button.is-wallet { background-image: url(../gui/images/wallet.svg); }
+.UserBar__button.menu-bar { 
+  background-image: url(../gui/images/menu-bar.svg); 
+  width: 21px;
+}
+
+.UserBar__button.is-box[data-count]::before {
+  content: attr(data-count);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: -20px;
+  top: 6px;
+  width: 31px;
+  height: 14px;
+  border-radius: 10px;
+  background-color: red;
+  color: white;
+  text-align: center;
+  font-size: 12px;
+}
+
+/* Popup styles */
+.UserBar__popup {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 20px);
+  pointer-events: all;
+}
+
+/* Bar icon styles */
+.bar-icon {
+  display: none;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+  pointer-events: all;
+}
+
+/* Media queries */
+@media (max-width: 960px) {
+  .UserBar__button.is-mint {
+    position: fixed;
+    right: 20px;
+    top: 74px;
+  }
+}
+
+@media (max-width: 800px) {
+  .UserBar__search-field {
+    width: calc(100% - 36px);
+    left: 18px;
+    top: 86px;
+    position: fixed;
+  }
+
+  .UserBar.connected .UserBar__search-field {
+    top: 20px;
+  }
+
+  .UserBar.connected .UserBar__popup {
+    top: calc(100% + 20px);
+  }
+}
+
+@media (max-width: 640px) {
+  .UserBar {
+    display: none;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    pointer-events: none;
+  }
+
+  .UserBar__buttons {
+    gap: 10px;
+  }
+
+  .UserBar__button.is-mint {
+    position: static;
+    top: 52px;
+    right: 12px;
+    font-size: 12px;
+    order: 3;
+  }
+
+  .UserBar__account {
+    font-size: 12px;
+  }
+
+  .bar-icon {
+    display: flex;
+  }
+}
+
+@media (max-width: 375px) {
+  .UserBar__button {
+    width: 32px;
+    height: 30px;
+  }
+
+  .UserBar__button.menu-bar {
+    width: 24px;
+    height: 25px;
+  }
+}
+
+/* User Menu styles */
+.UserMenu {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+.UserMenu__body {
+  position: absolute;
+  top: 70px;
+  pointer-events: all;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(7, 16, 50, 0.5);
+  backdrop-filter: blur(32.5px);
+  padding: 10px;
+  border-radius: 37px;
+  width: 98%;
+  max-width: 450px;
+}
+
+.UserMenu__content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.UserMenu__separate__line {
+  position: absolute;
+  height: 100%;
+  left: 84%;
+}
+
+.UserMenu__search {
+  width: 100%;
+  transition: all 0.3s ease; /* Add a smooth transition */
+}
+
+.UserMenu img {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.UserMenu__icons {
+  position: absolute;
+  width: 89%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.UserMenu__icon {
+  opacity: 30%;
+  width: 10%;
+}
+
+.UserMenu__icon:hover,
+.UserMenu__icon.active {
+  opacity: 100%;
+}
+
+
+@media (max-height: 667px) {
+  .UserMenu__body {
+    transform: scale(0.9);
+    top: 70px;
+  }
+}
+
+@media (min-width: 501px) and (max-height: 667px) {
+
+ .UserMenu__body {
+  transform: scale(0.8);
+  top: 70px;
+ }
+}

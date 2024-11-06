@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "lib": ["es2015", "ES6", "dom"],
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "outDir": "build",
+    "sourceMap": true,
+    "noImplicitThis": false,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/vue/*"],
+      "~/*": ["src/*"]
+    },
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowJs": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "exclude": ["node_modules", "public", "build", "dist"]
+}

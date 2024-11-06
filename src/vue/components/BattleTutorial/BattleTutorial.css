@@ -1,0 +1,137 @@
+.BattleTutorial {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: all;
+    background-image: url(../gui/images/background.png);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: contain;
+    user-select: none;
+}
+
+.BattleTutorial img {
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.BattleTutorial__container {
+    position: absolute;
+    top:0%;
+    height: 100%;
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 40px 10px 30px 10px;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+
+.BattleTutorial__title {
+    font-size: 36px;
+    color: white;
+    margin-bottom: 40px;
+}
+
+.BattleTutorial__content {
+    padding: 17px;
+    background-color: rgba(7, 16, 50);
+    border-radius: 20px;
+    max-width: 430px;
+}
+
+.BattkeTutorial__content-name {
+    font-size: 20px;
+    color:gray;
+}
+.BattleTutorial__content-description {
+    margin-top: 4.6%;
+    margin-bottom: 17px;
+    font-size: 16px;
+    color: white;
+}
+
+.BattleTutorial__content-image {
+    /* margin-bottom: 8.2%; */
+}
+
+.Battle__Tutorial-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 40px;
+    margin-bottom: 90px;
+}
+
+.Battle__Tutorial-flow-item {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #D9D9D94D;
+    
+}
+
+.Battle__Tutorial-flow-item--selected {
+    background: linear-gradient(360deg, #00C6FB 0%, #005BEA 100%);
+    box-shadow: 0px 0px 12.6px #006FED;
+}
+
+.BattleTutorial-bottom {
+    display: flex;
+    gap:20px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@media (max-width: 375px) {
+    .Battle__Tutorial-flow {
+        margin-bottom: 40px;
+    }
+}
+
+
+@media (max-height: 667px) and (min-width: 501px) {
+    .BattleTutorial__container {
+        justify-content: start;
+        
+    }
+    .BattleTutorial__container {
+        overflow-y: auto;
+    }
+    .Battle__Tutorial-flow {
+        margin-bottom: 20px;
+    }
+
+    .BattleTutorial__title {
+        font-size: 26px;
+    }
+
+    .BattleTutorial__content-description {
+        font-size: 14px;
+    }
+
+    .BattkeTutorial__content-name {
+        font-size: 16px;
+    }
+
+    .Battle__Tutorial-flow {
+        margin-bottom: 20px;
+        margin-top: 20px;
+        transform: scale(0.8);
+    }
+  
+   
+}
+
+
+
+

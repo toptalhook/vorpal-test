@@ -1,0 +1,167 @@
+.StarDefenderButton {
+    position: relative;
+    pointer-events: none;
+    user-select: none;
+    z-index: 3;
+}
+
+.StarDefenderButton__wrapper {
+    position: absolute;
+    top: -43px;
+    left: -33px;
+    /* transition: transform 0.1s ease-out; */
+    will-change: transform;
+}
+
+.StarDefenderButton__container {
+    position: relative;
+   
+}
+
+.StarDefenderButton__connectLine {
+    width: 38px;
+    height: 48px;
+    position: relative;
+}
+
+.StarDefenderButton__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -100%);
+    width: 200px;
+}
+
+.StarDefenderButton__bg {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+}
+  
+  .StarDefenderButton__search {
+     display: flex;
+     flex-direction: column;
+     gap: 4px;
+     justify-content: center;
+     align-items: center;
+     position: absolute;
+  }
+  
+  .StarDefenderButton__search-title {
+    font-size: 14px;
+    color: #00FFFF;
+    /* text-shadow: 0px 0px 483.84px #00FFFF, 0px 0px 276.48px #00FFFF, 0px 0px 161.28px #00FFFF, 0px 0px 80.64px #00FFFF, 0px 0px 23.04px #00FFFF, 0px 0px 11.52px #00FFFF; */
+    text-shadow: 0px 0px 23.04px #00FFFF, 0px 0px 11.52px #00FFFF;
+
+  }
+  
+  .StarDefenderButton__title:hover {
+    cursor: pointer;
+  }
+  
+  .StarDefenderButton__online {
+    position: absolute;
+    bottom: 3%;
+    font-size: 12px;
+    color: white;
+  }
+    
+    .StarDefenderButton__loading {
+      display: flex;
+      padding-right: 3px;
+      padding-left: 3px;
+      gap: 6px;
+      justify-content: space-between;
+    }
+    
+    .StarDefenderButton__dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      position: relative;
+      transition: ease opacity 200ms;
+      background-color: #00FFFF;
+      opacity: 0.5;
+      /* box-shadow: inset 0px 0px 7px #00FFFF; */
+  
+    }
+    
+    .StarDefenderButton__dot::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background-color: currentColor;
+      box-shadow: 0 0 6px currentColor;
+      opacity: 0;
+      transition: ease opacity 200ms;
+    }
+    
+    .StarDefenderButton__dot.is-active {
+      opacity: 1;
+      box-shadow: 0px 0px 10px #00FFFF;
+  
+    }
+    
+    .StarDefenderButton__dot.is-disabled {
+      opacity: 0.5;
+    }
+    
+    .StarDefenderButton__dot.is-disabled::after {
+      opacity: 0;
+    }
+  
+
+.StarDefenderButton__name {
+    position: absolute;
+    top: 4%;
+    font-size: 15px;
+    color: black;
+    z-index: 16;
+    pointer-events:all;
+}
+
+.StarDefenderButton__title {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    color: #00FFFF;
+    text-shadow: 0px 0px 11.52px #00FFFF;
+    z-index: 10;
+    pointer-events: all;
+}
+
+.StarDefenderButton__name:hover {
+    cursor: pointer;
+}
+
+.StarDefenderButton__title:hover {
+    cursor: pointer;
+}
+
+.StarDefenderButton__online {
+    position: absolute;
+    bottom: 3%;
+    font-size: 12px;
+    color: white;
+}
+
+@media (max-width: 430px) {
+   
+.StarDefenderButton__content {
+    width: 170px;
+}
+}
+
+@media (max-height: 667px) and (min-width: 501px) {
+    .StarDefenderButton__content {
+        width: 170px;
+    }
+}

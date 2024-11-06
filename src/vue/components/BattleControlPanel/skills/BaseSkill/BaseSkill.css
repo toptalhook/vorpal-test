@@ -1,0 +1,108 @@
+.BaseSkill {
+  position: relative;
+  z-index: 0;
+  width: 19%;
+  outline: none;
+  user-select: none;
+}
+.BaseSkill__content{
+   z-index: 4;
+   width: 100%;
+   pointer-events: all;
+}
+.BaseSkill__levelUp {
+  position: absolute;
+  pointer-events: all;
+  top: -15%;
+  left: 0;
+  width: 100%;
+  height: 38%;
+  z-index: 5;
+}
+
+.BaseSkill__levelContainer {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.BaseSkill__levelAnimation {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: translateY(25%) scale(1,1);
+  /* transform-origin: center; */
+  animation: zoomOut 3s infinite forwards linear;
+  transition: all 1s linear;
+}
+
+@keyframes zoomOut {
+  from {
+      opacity: 0;
+      transform: translateY(25%) scale(1,1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateY(10%) scale(1,1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-40%) scale(1,1);
+}
+}
+
+.BaseSkill__levelAnimation:nth-child(1) {
+  animation-delay: calc(1000ms * -1);
+}
+
+.BaseSkill__levelAnimation:nth-child(2) {
+  animation-delay: calc(1000ms * 0);
+}
+
+.BaseSkill__levelAnimation:nth-child(3) {
+  animation-delay: calc(1000ms * 1);
+}
+
+.BaseSkill__levelAnimation:nth-child(4) {
+  animation-delay: calc(1000ms * 2);
+} 
+
+.BaseSkill__levelAnimation:nth-child(5) {
+  animation-delay: calc(1000ms * 3);
+}
+
+.BaseSkill__levelAnimation:nth-child(6) {
+  animation-delay: calc(1000ms * 4);
+}
+
+.BaseSkill__levelBar {
+  display: flex;
+  gap: 2px;
+  position: absolute;
+  right: 0;
+  top: calc(100% - 5px);
+  transform: rotate(-32deg);
+}
+
+.BaseSkill__level {
+  width: 5px;
+  height: 5px;
+  background-color: rgba(0, 94, 234, 0.3);
+}
+
+.BaseSkill__level.active {
+  background-color: #005EEA;
+}
+
+@media (max-width: 375px) {
+  
+  .BaseSkill__levelBar {
+    top: calc(100% - 0px);
+}
+
+  .BaseSkill__level {
+    width: 4px;
+    height: 4px;
+  }
+}
