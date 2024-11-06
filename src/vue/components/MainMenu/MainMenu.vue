@@ -19,10 +19,7 @@
           {{ item.text }}
         </div>
       </div>
-      <div 
-        class="MainMenu__items-boxshadow"
-        :class="{ 'MainMenu__items-boxshadow--hidden': isScrolledToBottom }"
-      ></div> 
+      <div class="MainMenu__items-boxshadow"></div> 
       
     </div>
   </div>
@@ -46,50 +43,36 @@ export default {
         { text: 'QUESTS', opacity: 1, selected: false },
         { text: 'SETTINGS', opacity: 1, selected: false },
       ],
-      scrolling: false,
-      isScrolledToBottom: false,
-      momentum: 0,
+      isScrolling: false,
       lastY: 0,
-      lastTime: 0,
+      velocity: 0,
+      friction: 0.95, // Adjust this for smoother or faster deceleration
+      requestID: null,
     };
   },
   mounted() {
     const menuItems = this.$refs.menuItems;
-    let startY;
 
     menuItems.addEventListener('touchstart', (e) => {
-      startY = e.touches[0].pageY;
-      this.lastY = startY;
-      this.lastTime = Date.now();
-      this.momentum = 0;
-      // Cancel any ongoing animation
-      if (this.animationFrame) {
-        cancelAnimationFrame(this.animationFrame);
+      this.isScrolling = false;
+      this.lastY = e.touches[0].pageY;
+      this.velocity = 0;
+      if (this.requestID) {
+        cancelAnimationFrame(this.requestID); // Stop any ongoing animations
       }
     });
 
     menuItems.addEventListener('touchmove', (e) => {
       const currentY = e.touches[0].pageY;
-      const deltaY = currentY - startY;
-      const currentTime = Date.now();
-      
-      // Calculate momentum
-      const timeElapsed = currentTime - this.lastTime;
-      if (timeElapsed > 0) {
-        this.momentum = (currentY - this.lastY) / timeElapsed * 15; // Adjust multiplier for desired effect
-      }
-      
-      menuItems.scrollTop -= deltaY;
-      startY = currentY;
+      this.velocity = currentY - this.lastY; // Calculate velocity based on distance moved
+      menuItems.scrollTop -= this.velocity; // Apply movement
       this.lastY = currentY;
-      this.lastTime = currentTime;
       e.preventDefault();
     });
 
     menuItems.addEventListener('touchend', () => {
-      if (Math.abs(this.momentum) > 0.1) {
-        this.animateScroll();
-      }
+      this.isScrolling = true;
+      this.applyMomentumScroll(menuItems);
     });
   },
   methods: {
@@ -99,32 +82,26 @@ export default {
       });
       this.$emit('selectItem', name); 
     },
-    handleScroll(event: Event) {
-      // const target = event.target as HTMLElement;
-      // const bottomReached = Math.abs(
-      //   target.scrollHeight - target.scrollTop - target.clientHeight
-      // ) < 5;
-      // this.isScrolledToBottom = bottomReached;
-    },
-    animateScroll() {
-      const menuItems = this.$refs.menuItems;
-      const friction = 0.95; // Adjust for desired deceleration
+    applyMomentumScroll(element) {
+      const threshold = 0.1; // Minimum speed to stop animation
 
-      const animate = () => {
-        menuItems.scrollTop -= this.momentum;
-        this.momentum *= friction;
-
-        if (Math.abs(this.momentum) > 0.1) {
-          this.animationFrame = requestAnimationFrame(animate);
+      const step = () => {
+        if (Math.abs(this.velocity) > threshold) {
+          element.scrollTop -= this.velocity; // Move scroll position by current velocity
+          this.velocity *= this.friction; // Apply friction to reduce velocity
+          this.requestID = requestAnimationFrame(step); // Continue the animation
+        } else {
+          cancelAnimationFrame(this.requestID); // Stop when below threshold
+          this.isScrolling = false;
         }
       };
 
-      this.animationFrame = requestAnimationFrame(animate);
+      this.requestID = requestAnimationFrame(step);
     },
   },
   beforeDestroy() {
-    if (this.animationFrame) {
-      cancelAnimationFrame(this.animationFrame);
+    if (this.requestID) {
+      cancelAnimationFrame(this.requestID);
     }
   }
 };
